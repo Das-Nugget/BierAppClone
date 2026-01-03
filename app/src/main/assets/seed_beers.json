@@ -1,0 +1,1802 @@
+[
+  {
+    "name": "Hacklberg Dult Festbier",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Dunkel",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Dunkel Spezial",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Edelhell Export",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg eX!",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Festbier",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Hochfürst Pilsener",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.0,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Humorator",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Jakobi Weißbier Dunkel",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Jakobi Weißbier Hell",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Jakobi Weißbier Leicht",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Jubiläumsbier",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Leicht",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Urhell",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Weihnachtstrunk",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Zwickl",
+    "producer": "Hacklberg",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse Aventinus Weizen Eisbock",
+    "producer": "Schneider",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse Tap 1 Mein Blondes",
+    "producer": "Schneider",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse Tap 11 Unsere Leichte Weisse",
+    "producer": "Schneider",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse Tap 2 Mein Kristall",
+    "producer": "Schneider",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse Tap 4 Mein Grünes",
+    "producer": "Schneider",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse Tap 5 Meine Hopfenweisse",
+    "producer": "Schneider",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse Tap 6 Unser Aventinus",
+    "producer": "Schneider",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse Tap 7 Unser Original",
+    "producer": "Schneider",
+    "alcoholPercentage": 5.4,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse TapX Mein Cuvée Barrique",
+    "producer": "Schneider",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse TapX Mein Nelson Sauvin",
+    "producer": "Schneider",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse TapX Meine Porter Weisse",
+    "producer": "Schneider",
+    "alcoholPercentage": 5.6,
+    "type": "PORTER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Schneider Weisse TapX Meine Sommer Weisse",
+    "producer": "Schneider",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Christkindl",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Coronator",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Pilsener",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Schloss Dunkel",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Schloss Hell",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Urfass",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Weissbier Dunkel",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Weissbier Hell",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Arcobräu Weissbier Leicht",
+    "producer": "Arcobräu",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Fips Weizen",
+    "producer": "Fips",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Graf Arco Light",
+    "producer": "Graf",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Anno 1050",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 5.5,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Asam Bock",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 7.3,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Barock Dunkel",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Barock Hell",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Hefe-Weißbier Dunkel",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Hefe-Weißbier Hell",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Pils",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Urtyp Hell",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Weltenburger Kloster Winter-Traum",
+    "producer": "Weltenburger",
+    "alcoholPercentage": 6.0,
+    "type": "SPECIALTY_BEER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Egerer Altbayerisch Dunkel",
+    "producer": "Egerer",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Egerer Bayerisch Zwickel",
+    "producer": "Egerer",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Egerer Edel Pils",
+    "producer": "Egerer",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Egerer Gold-Märzen",
+    "producer": "Egerer",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Egerer Original Export",
+    "producer": "Egerer",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Egerer Urtyp Hell",
+    "producer": "Egerer",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Egerer Weizen Dunkel",
+    "producer": "Egerer",
+    "alcoholPercentage": 5.4,
+    "type": "DUNKELWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Egerer Weizen Hell",
+    "producer": "Egerer",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "König Wilhelm Hell",
+    "producer": "König",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Hefe-Weissbier Dunkel",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Hefe-Weissbier Hell",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Kristall Weizen",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Leichte Weisse",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Original 1649",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Pils",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Regensburger Premium",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Urhell",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bischofshof Zoigl",
+    "producer": "Bischofshof",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Würzburger Hofbräu 1643 Original Lager Hell",
+    "producer": "Würzburger",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Würzburger Hofbräu Export",
+    "producer": "Würzburger",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Würzburger Hofbräu Julius Echter Weißbier",
+    "producer": "Würzburger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Würzburger Hofbräu Julius Echter Weißbier Hell",
+    "producer": "Würzburger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Würzburger Hofbräu Leicht",
+    "producer": "Würzburger",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Würzburger Hofbräu Pilsner",
+    "producer": "Würzburger",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Würzburger Hofbräu Schwarzbier",
+    "producer": "Würzburger",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Augsburger Herrenpils",
+    "producer": "Augsburger",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Commerzienrat Riegele Privat",
+    "producer": "Commerzienrat",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Riegele Urhell",
+    "producer": "Riegele",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Riegele Kellerbier",
+    "producer": "Riegele",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Riegele Aechtes Dunkel",
+    "producer": "Riegele",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Riegele's Weisse",
+    "producer": "Riegele's",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Speziator Doppelbock Hell",
+    "producer": "Speziator",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustersbacher Altbayerisch Dunkles",
+    "producer": "Ustersbacher",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustersbacher Bayerisch Hefeweizen",
+    "producer": "Ustersbacher",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustersbacher Dunkle Weisse",
+    "producer": "Ustersbacher",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustersbacher Edel-Export",
+    "producer": "Ustersbacher",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustersbacher Festbier",
+    "producer": "Ustersbacher",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustersbacher Leichte Weisse",
+    "producer": "Ustersbacher",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustersbacher Pilsner",
+    "producer": "Ustersbacher",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustersbacher Privat Pils",
+    "producer": "Ustersbacher",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ustator",
+    "producer": "Ustator",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Reischenau Gold",
+    "producer": "Reischenau",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Dunkel",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Dunkles Weizen",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 5.4,
+    "type": "DUNKELWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Export Hell",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Hefetrübes Weizen",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Hell",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Hell Leicht",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Märzen",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Pils",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer St.Laurentius-Bock",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Weihnachtsmärzen",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Unterbaarer Weizenbock",
+    "producer": "Unterbaarer",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Paarthaler Leichtes Weizen",
+    "producer": "Paarthaler",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "1516 Zwick'lbier",
+    "producer": "1516",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Meckatzer Fest-Märzen",
+    "producer": "Meckatzer",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Meckatzer Leichtes Helles",
+    "producer": "Meckatzer",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Meckatzer Leichtes Weizen",
+    "producer": "Meckatzer",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Meckatzer Pils",
+    "producer": "Meckatzer",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Meckatzer Urweizen",
+    "producer": "Meckatzer",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Meckatzer Weiss-Gold",
+    "producer": "Meckatzer",
+    "alcoholPercentage": 6.0,
+    "type": "SPECIALTY_BEER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Meckatzer Weizen",
+    "producer": "Meckatzer",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Alpkönig Dunkel",
+    "producer": "Alpkönig",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Alpkönig Dunkle Weiße",
+    "producer": "Alpkönig",
+    "alcoholPercentage": 5.4,
+    "type": "DUNKELWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Alpkönig Gold",
+    "producer": "Alpkönig",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Alpkönig Hefeweizen",
+    "producer": "Alpkönig",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Alpkönig Kellerbier",
+    "producer": "Alpkönig",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Alpkönig Weitnauer Märzen",
+    "producer": "Alpkönig",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Antoniter Bayerisch Hell",
+    "producer": "Antoniter",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayerisch Zunftherrn Dunkle Weisse",
+    "producer": "Bayerisch",
+    "alcoholPercentage": 5.4,
+    "type": "DUNKELWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayerisch Zunftherrn Export",
+    "producer": "Bayerisch",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayerisch Zunftherrn Hefe-Weisse",
+    "producer": "Bayerisch",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayerisch Zunftherrn Hell",
+    "producer": "Bayerisch",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayerisch Zunftherrn Leichte Weisse",
+    "producer": "Bayerisch",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayerisch Zunftherrn Pils",
+    "producer": "Bayerisch",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayerisch Zunftherrn Silberbock",
+    "producer": "Bayerisch",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Brau Masters Export",
+    "producer": "Brau",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Brau Masters Hefeweizen",
+    "producer": "Brau",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Brau Masters Pils",
+    "producer": "Brau",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hirsch Bier Urhell",
+    "producer": "Hirsch",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Klösterle Dunkle Weisse",
+    "producer": "Klösterle",
+    "alcoholPercentage": 5.4,
+    "type": "DUNKELWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Klösterle Export",
+    "producer": "Klösterle",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Klösterle Kellerbier",
+    "producer": "Klösterle",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Klösterle Kristall Weizen",
+    "producer": "Klösterle",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Klösterle Pils",
+    "producer": "Klösterle",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Klösterle Premium",
+    "producer": "Klösterle",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Klösterle Privat",
+    "producer": "Klösterle",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Klösterle Weisse",
+    "producer": "Klösterle",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ulmer Münster Gulden Classic",
+    "producer": "Ulmer",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ulmer Münster Hefe-Weizen",
+    "producer": "Ulmer",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ulmer Münster Herren Pils",
+    "producer": "Ulmer",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ulmer Münster Kristall-Weizen",
+    "producer": "Ulmer",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Ulmer Münster UBG Lager",
+    "producer": "Ulmer",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Bergler Bier",
+    "producer": "Memminger",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Dunkle Weiße",
+    "producer": "Memminger",
+    "alcoholPercentage": 5.4,
+    "type": "DUNKELWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Flight",
+    "producer": "Memminger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Gaugraf Silach",
+    "producer": "Memminger",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Gold",
+    "producer": "Memminger",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Kartäuser Doppelbock Dunkel",
+    "producer": "Memminger",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Kartäuser Spezialbier",
+    "producer": "Memminger",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Kartäuser Weißbier",
+    "producer": "Memminger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Kellerpils",
+    "producer": "Memminger",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Kristall-Weizen",
+    "producer": "Memminger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Lager Schwarz",
+    "producer": "Memminger",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Leichte Weiße",
+    "producer": "Memminger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Premium",
+    "producer": "Memminger",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Skip",
+    "producer": "Memminger",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Memminger Weißbier",
+    "producer": "Memminger",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Alt",
+    "producer": "Original",
+    "alcoholPercentage": 4.7,
+    "type": "ALTBIER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Bock",
+    "producer": "Original",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Dunkles Hefeweißbier",
+    "producer": "Original",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Export",
+    "producer": "Original",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Gold",
+    "producer": "Original",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Hefeweißbier",
+    "producer": "Original",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Kellerbier",
+    "producer": "Original",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Kristall-Weizen",
+    "producer": "Original",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Leicht",
+    "producer": "Original",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Leichte Weiße",
+    "producer": "Original",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Pils",
+    "producer": "Original",
+    "alcoholPercentage": 4.7,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Schwarzbier",
+    "producer": "Original",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Urtyp",
+    "producer": "Original",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Vollbier",
+    "producer": "Original",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Original Oettinger Winterbier",
+    "producer": "Original",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Maisel's Weisse Original",
+    "producer": "Maisel's",
+    "alcoholPercentage": 5.1,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Maisel's Weisse Light",
+    "producer": "Maisel's",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Maisel's Weisse Kristall",
+    "producer": "Maisel's",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Maisel's Weisse Dunkel",
+    "producer": "Maisel's",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Maisel's Weisse Hell",
+    "producer": "Maisel's",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Edelhopfen Diät-Pilsner",
+    "producer": "Edelhopfen",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Edelhopfen Extra-Pilsner Premium",
+    "producer": "Edelhopfen",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayreuther Aktien Original",
+    "producer": "Bayreuther",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayreuther Aktien Landbier Dunkel",
+    "producer": "Bayreuther",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayreuther Aktien Zwick'l Kellerbier",
+    "producer": "Bayreuther",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayreuther Aktien Pilsner",
+    "producer": "Bayreuther",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayreuther Hell",
+    "producer": "Bayreuther",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bayreuther Hefe-Weissbier",
+    "producer": "Bayreuther",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Bio-Weisse|Bayreuther Bio-Weisse Naturtrüb",
+    "producer": "Bio-Weisse|Bayreuther",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "EKU 28",
+    "producer": "EKU",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "EKU Export",
+    "producer": "EKU",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "EKU Festbier",
+    "producer": "EKU",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "EKU Hell",
+    "producer": "EKU",
+    "alcoholPercentage": 5.0,
+    "type": "HELLES",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "EKU Pils",
+    "producer": "EKU",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kapuziner Kellerweizen",
+    "producer": "Kapuziner",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kapuziner Weißbier",
+    "producer": "Kapuziner",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kapuziner Weißbier Kristall",
+    "producer": "Kapuziner",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kapuziner Weißbier Leicht",
+    "producer": "Kapuziner",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kapuziner Weißbier Schwarz",
+    "producer": "Kapuziner",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kapuziner Winter-Weißbier",
+    "producer": "Kapuziner",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kulmbacher Edelherb",
+    "producer": "Kulmbacher",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kulmbacher Eisbock",
+    "producer": "Kulmbacher",
+    "alcoholPercentage": 9.2,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kulmbacher Export",
+    "producer": "Kulmbacher",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kulmbacher Feinmild",
+    "producer": "Kulmbacher",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kulmbacher Festbier",
+    "producer": "Kulmbacher",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kulmbacher Gold",
+    "producer": "Kulmbacher",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kulmbacher Lager",
+    "producer": "Kulmbacher",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Kulmbacher Leicht",
+    "producer": "Kulmbacher",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Bayerisch Hell",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Bockbier",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Kellerbier",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Lager",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Landbier",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 5.5,
+    "type": "DORTMUNDER_EXPORT",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Maibock",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Original",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Schwarzbier",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Weihnachtsbier",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Mönchshof Weihnachtsbock",
+    "producer": "Mönchshof",
+    "alcoholPercentage": 6.6,
+    "type": "BOCK",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Dunkle Weisse",
+    "producer": "Leikeim",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Feines Schwarzes",
+    "producer": "Leikeim",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Helle Weisse",
+    "producer": "Leikeim",
+    "alcoholPercentage": 5.3,
+    "type": "HEFEWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Kellerbier Naturtrüb",
+    "producer": "Leikeim",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Lager",
+    "producer": "Leikeim",
+    "alcoholPercentage": 5.0,
+    "type": "LAGER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Landbier",
+    "producer": "Leikeim",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Original Steinbier",
+    "producer": "Leikeim",
+    "alcoholPercentage": 0.0,
+    "type": "UNKNOWN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Original Steinweisse",
+    "producer": "Leikeim",
+    "alcoholPercentage": 5.0,
+    "type": "HISTORICAL_BEER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Premium",
+    "producer": "Leikeim",
+    "alcoholPercentage": 4.9,
+    "type": "PILSNER",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Schwarze Weisse",
+    "producer": "Leikeim",
+    "alcoholPercentage": 5.4,
+    "type": "DUNKELWEIZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Leikeim Wintertraum",
+    "producer": "Leikeim",
+    "alcoholPercentage": 6.0,
+    "type": "SPECIALTY_BEER",
+    "price": 0.0,
+    "note": null
+  }
+]
