@@ -29,12 +29,11 @@ class RatingTabViewModel @Inject constructor(
     val searchQuery = _searchQuery.asStateFlow()
 
     val filteredBeers = combine(allBeers, _searchQuery) { beers, query ->
-        val onlyRated = beers.filter { it.ratingId != null }
-        if (query.isBlank()) {
-            onlyRated
-        } else {
-            onlyRated.filter { it.name.contains(query, ignoreCase = true) }
-        }
+        beers
+            .filter { it.ratingId != null } // Only beers with a rating
+            .filter { beer ->
+                beer.name.contains(query, ignoreCase = true)
+            }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
