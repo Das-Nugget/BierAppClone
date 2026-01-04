@@ -49,7 +49,6 @@ fun CustomizableSearchBar(
 
     Box(
         modifier
-            .fillMaxWidth()
             .semantics { isTraversalGroup = true }
     ) {
         SearchBar(
