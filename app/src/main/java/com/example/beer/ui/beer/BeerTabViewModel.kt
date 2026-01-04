@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class BeerTabViewModel @Inject constructor(
@@ -24,6 +26,25 @@ class BeerTabViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
+
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
+
+    val filteredBeers = combine(allBeers, _searchQuery) { beers, query ->
+        if (query.isBlank()) {
+            beers
+        } else {
+            beers.filter { it.name.contains(query, ignoreCase = true) }
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
+
+    fun onSearchQueryChange(newQuery: String) {
+        _searchQuery.value = newQuery
+    }
 
     /*private val _allBeers = MutableStateFlow<List<BeerModel>>(emptyList())
     val allBeers = _allBeers.asStateFlow()
