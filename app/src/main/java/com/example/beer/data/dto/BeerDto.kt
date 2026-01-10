@@ -11,7 +11,8 @@ data class BeerDto(
     val alcoholPercentage: Double,
     val type: BeerType,
     val price: Double,
-    val note: String?
+    val note: String?,
+    val createdAt: Long = System.currentTimeMillis()
 )
 
 fun BeerModel.toExport(): BeerDto = BeerDto(
@@ -34,5 +35,6 @@ fun BeerDto.toModel(): BeerModel =
         price = price,
         note = note,
         ratingId = null,
-        tasteId = null
+        tasteId = null,
+        createdAt = createdAt
     )

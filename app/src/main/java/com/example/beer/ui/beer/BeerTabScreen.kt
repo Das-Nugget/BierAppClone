@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beer.data.model.BeerModel
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Composable
@@ -48,18 +49,18 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
 
     Box(modifier = Modifier.fillMaxSize()) {
 
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-
-        LazyColumn(
+        Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            items(beers) { beer ->
-                BeerItem(beer = beer)
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(beers) { beer ->
+                    BeerItem(beer = beer)
+                }
             }
         }
-    }
 
         Row(
             modifier = Modifier
@@ -89,12 +90,14 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                     contentDescription = "Filter"
                 )
             }
+        }
     }
 }
 
 @Composable
 fun BeerItem(beer: BeerModel) {
-
+    val dateFormatter = remember { SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()) }
+    val formattedDate = dateFormatter.format(Date(beer.createdAt))
     Card (
         modifier = Modifier.fillMaxWidth(),
         shape = androidx.compose.foundation.shape.RoundedCornerShape(0)
@@ -140,7 +143,7 @@ fun BeerItem(beer: BeerModel) {
                 contentAlignment = Alignment.BottomEnd
             ) {
                 Text(
-                    text = "created-date",
+                    text = formattedDate,
                     fontSize = 12.sp,
                     color = Color.Gray
                 )

@@ -33,4 +33,5 @@ data class BeerModel(
     val note: String?,
     val ratingId: Int?,
     val tasteId: Int?,
+    val createdAt: Long = System.currentTimeMillis()
 ) : Serializable
