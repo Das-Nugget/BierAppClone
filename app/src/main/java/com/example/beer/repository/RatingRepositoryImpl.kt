@@ -3,6 +3,7 @@ package com.example.beer.repository
 import com.example.beer.data.dao.RatingDao
 import com.example.beer.data.model.RatingModel
 import com.example.beer.interfaces.RatingRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,7 +12,7 @@ class RatingRepositoryImpl @Inject constructor(
     private val ratingDao: RatingDao
 ) : RatingRepository {
 
-    override suspend fun getAllRatings(): List<RatingModel> =
+    override fun getAllRatings(): Flow<List<RatingModel>> =
         ratingDao.getAllRatings()
 
     override suspend fun getRatingById(id: Int): RatingModel? =

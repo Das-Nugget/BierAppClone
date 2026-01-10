@@ -3,6 +3,7 @@ package com.example.beer.data.dao
 
 import androidx.room.*
 import com.example.beer.data.model.RatingModel
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RatingDao {
@@ -10,7 +11,7 @@ interface RatingDao {
     suspend fun insertRating(rating: RatingModel): Long
 
     @Query("SELECT * FROM ratings")
-    suspend fun getAllRatings(): List<RatingModel>
+    fun getAllRatings(): Flow<List<RatingModel>>
 
     @Query("SELECT * FROM ratings WHERE id = :id")
     suspend fun getRatingById(id: Int): RatingModel?

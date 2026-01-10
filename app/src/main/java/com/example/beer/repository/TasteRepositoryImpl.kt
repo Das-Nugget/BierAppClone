@@ -3,6 +3,7 @@ package com.example.beer.repository
 import com.example.beer.data.dao.TasteDao
 import com.example.beer.data.model.TasteModel
 import com.example.beer.interfaces.TasteRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,7 +12,7 @@ class TasteRepositoryImpl @Inject constructor(
     private val tasteDao: TasteDao
 ) : TasteRepository {
 
-    override suspend fun getAllTastes(): List<TasteModel> =
+    override fun getAllTastes(): Flow<List<TasteModel>> =
         tasteDao.getAllTastes()
 
     override suspend fun getTasteById(id: Int): TasteModel? =

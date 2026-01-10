@@ -2,6 +2,7 @@ package com.example.beer.data.dao
 
 import androidx.room.*
 import com.example.beer.data.model.TasteModel
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TasteDao {
@@ -9,7 +10,7 @@ interface TasteDao {
     suspend fun insertTaste(taste: TasteModel): Long
 
     @Query("SELECT * FROM tastes")
-    suspend fun getAllTastes(): List<TasteModel>
+    fun getAllTastes(): Flow<List<TasteModel>>
 
     @Query("SELECT * FROM tastes WHERE id = :id")
     suspend fun getTasteById(id: Int): TasteModel?

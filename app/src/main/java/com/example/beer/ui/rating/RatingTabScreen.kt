@@ -1,9 +1,11 @@
 package com.example.beer.ui.rating
 
+import FilterBeerDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,15 +21,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.beer.data.enums.Aftertaste
+import com.example.beer.data.enums.Bitterness
+import com.example.beer.data.enums.Mouthfeel
+import com.example.beer.data.enums.Sweetness
 import com.example.beer.ui.searchbar.CustomizableSearchBar
 
 @Composable
 fun RatingTabScreen(viewModel: RatingTabViewModel) {
     val searchQuery by viewModel.searchQuery.collectAsState()
     val beers by viewModel.filteredBeers.collectAsState()
+    var showFilterDialog by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -36,7 +46,7 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.Top
         ) {
-            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(80.dp))
+            Spacer(modifier = Modifier.height(80.dp))
 
             Text("Beers:", modifier = Modifier.padding(bottom = 8.dp))
 
@@ -74,7 +84,7 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
             )
 
             FilledIconButton(
-                onClick = { /* Open filter menu or perform action */ },
+                onClick = { showFilterDialog = true},
                 modifier = Modifier.size(48.dp) // standard touch target size
             ) {
                 Icon(
@@ -83,5 +93,18 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
                 )
             }
         }
+
+        if (showFilterDialog) {
+            FilterBeerDialog(
+                onDismiss = { showFilterDialog = false },
+                onSearch = { minR, maxR, minT, maxT, minL, maxL, minD, maxD, aft, bit, mou, swe ->
+                    viewModel.applyFilters(
+                        minR, maxR, minT, maxT, minL, maxL, minD, maxD, aft, bit, mou, swe
+                    )
+                    showFilterDialog = false
+                }
+            )
+        }
     }
 }
+
