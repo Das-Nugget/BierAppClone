@@ -29,6 +29,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import com.example.beer.ui.searchbar.CustomizableSearchBar
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.beer.data.model.BeerModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun BeerTabScreen(viewModel: BeerTabViewModel) {
@@ -37,29 +48,19 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
 
     Box(modifier = Modifier.fillMaxSize()) {
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Top
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
         ) {
-            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(80.dp))
-
-            Text("Beers:", modifier = Modifier.padding(bottom = 8.dp))
-
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(beers) { beer ->
-                    Text(
-                        text = beer.name,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                    )
-                }
+            items(beers) { beer ->
+                BeerItem(beer = beer)
             }
         }
+    }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -88,6 +89,64 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                     contentDescription = "Filter"
                 )
             }
+    }
+}
+
+@Composable
+fun BeerItem(beer: BeerModel) {
+
+    Card (
+        modifier = Modifier.fillMaxWidth(),
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(0)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(12.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .background(Color(0xFFFFB300)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "IMG",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = beer.name,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = beer.producer,
+                    fontSize = 14.sp,
+                    color = Color.Gray
+                )
+                Text(
+                    text = "year",
+                    fontSize = 14.sp,
+                    color = Color.Gray
+                )
+            }
+            Box(
+                modifier = Modifier.fillMaxHeight(),
+                contentAlignment = Alignment.BottomEnd
+            ) {
+                Text(
+                    text = "created-date",
+                    fontSize = 12.sp,
+                    color = Color.Gray
+                )
+            }
         }
+
+        HorizontalDivider(thickness = 0.5.dp, color = Color.LightGray)
     }
 }
