@@ -19,6 +19,10 @@ import com.example.beer.ui.setting.SettingsTabViewModel
 import com.example.beer.ui.beer.BeerTabScreen
 import com.example.beer.ui.rating.RatingTabScreen
 import com.example.beer.ui.setting.SettingsTabScreen
+import androidx.compose.material3.Icon
+import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.NavigationBarDefaults
+import androidx.compose.material3.NavigationBarItemDefaults
 
 @Composable
 fun BottomTabsScreen(
@@ -27,19 +31,38 @@ fun BottomTabsScreen(
     settingsTabViewModel: SettingsTabViewModel = hiltViewModel(),
     tabsViewModel: TabsViewModel = hiltViewModel()
 ) {
-
     val selectedTab by tabsViewModel.selectedTab.collectAsState()
-    val content by tabsViewModel.content.collectAsState()
+    val navBarColor = Color(0xFFFFB300)
+    val selectedContentColor = Color.White
+    val unselectedContentColor = Color.White.copy(alpha = 0.6f)
 
     Scaffold(
         bottomBar = {
-            NavigationBar {
+            NavigationBar (
+                containerColor = navBarColor,
+                contentColor = Color.White
+            ) {
                 TabItem.values().forEach { tab ->
+                    val isSelected = tab == selectedTab
+
                     NavigationBarItem(
-                        selected = tab == selectedTab,
+                        selected = isSelected,
                         onClick = { tabsViewModel.selectTab(tab) },
-                        label = { Text(tab.title) },
-                        icon = { /* optional icon */ }
+                        label = { Text(text = tab.title, color = if (isSelected) selectedContentColor else unselectedContentColor) },
+                        icon = {
+                            Icon(
+                                imageVector = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
+                                contentDescription = tab.title
+                            )
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = selectedContentColor,
+                            unselectedIconColor = unselectedContentColor,
+                            selectedTextColor = selectedContentColor,
+                            unselectedTextColor = unselectedContentColor,
+                            indicatorColor = Color.White.copy(alpha = 0.2f)
+
+                        )
                     )
                 }
             }

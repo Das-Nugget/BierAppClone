@@ -19,31 +19,91 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.beer.data.model.BeerModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun BeerTabScreen(viewModel: BeerTabViewModel) {
     val beers by viewModel.allBeers.collectAsState()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Top
+        modifier = Modifier.fillMaxSize()
     ) {
 
-        Text("Beers:", modifier = Modifier.padding(bottom = 8.dp))
-
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.fillMaxSize()
         ) {
             items(beers) { beer ->
+                BeerItem(beer = beer)
+            }
+        }
+    }
+}
+
+@Composable
+fun BeerItem(beer: BeerModel) {
+
+    Card (
+        modifier = Modifier.fillMaxWidth(),
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(0)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(12.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .background(Color(0xFFFFB300)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "IMG",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = beer.name,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = beer.producer,
+                    fontSize = 14.sp,
+                    color = Color.Gray
+                )
+                Text(
+                    text = "year",
+                    fontSize = 14.sp,
+                    color = Color.Gray
+                )
+            }
+            Box(
+                modifier = Modifier.fillMaxHeight(),
+                contentAlignment = Alignment.BottomEnd
+            ) {
+                Text(
+                    text = "created-date",
+                    fontSize = 12.sp,
+                    color = Color.Gray
                 )
             }
         }
+        HorizontalDivider(thickness = 0.5.dp, color = Color.LightGray)
     }
 }

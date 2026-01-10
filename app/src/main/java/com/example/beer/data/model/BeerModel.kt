@@ -32,5 +32,5 @@ data class BeerModel(
     val price: Double,
     val note: String?,
     val ratingId: Int?,
-    val tasteId: Int?
+    val tasteId: Int?,
 ) : Serializable
