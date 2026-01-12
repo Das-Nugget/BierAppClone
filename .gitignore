@@ -30,7 +30,7 @@ $RECYCLE.BIN/
 # ===========================================
 # GRADLE / BUILD
 # ===========================================
-.gradle/
+.gradle/*
 build/
 **/build/
 !gradle/wrapper/gradle-wrapper.jar
