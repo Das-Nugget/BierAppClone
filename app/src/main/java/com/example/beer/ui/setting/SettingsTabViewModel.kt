@@ -18,6 +18,8 @@ class SettingsTabViewModel @Inject constructor(
     sealed class SettingsEvent {
         data class ExportSuccess(val uri: Uri) : SettingsEvent()
         data class ExportError(val error: Throwable) : SettingsEvent()
+        data class ImportSuccess(val result: JsonFileManager.ImportResult) : SettingsEvent()
+        data class ImportError(val error: Throwable) : SettingsEvent()
     }
 
     private val _events = MutableSharedFlow<SettingsEvent>()
@@ -37,8 +39,14 @@ class SettingsTabViewModel @Inject constructor(
         }
     }
 
-    fun import() {
+    fun import(uri: Uri) {
         viewModelScope.launch {
+            try {
+                val result = jsonFileManager.importBeersJson(uri)
+                _events.emit(SettingsEvent.ImportSuccess(result))
+            } catch (e: Exception) {
+                _events.emit(SettingsEvent.ImportError(e))
+            }
         }
     }
 

@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Hacklberg Test",
+    "producer": "Test Bier",
+    "alcoholPercentage": 5.8,
+    "type": "MARZEN",
+    "price": 0.0,
+    "note": null
+  },
+  {
+    "name": "Hacklberg Test Hell",
+    "producer": "Test Hell",
+    "alcoholPercentage": 5.0,
+    "type": "DARK_LAGER",
+    "price": 0.0,
+    "note": null
+  }
+  ]

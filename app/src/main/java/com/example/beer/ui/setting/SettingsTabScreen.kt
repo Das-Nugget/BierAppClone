@@ -2,6 +2,8 @@ package com.example.beer.ui.setting
 
 import android.content.Intent
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -27,6 +29,14 @@ fun SettingsTabScreen(
 ) {
     val context = LocalContext.current
 
+    val pickJsonLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri != null) {
+            viewModel.import(uri)
+        }
+    }
+
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
             when (event) {
@@ -46,6 +56,21 @@ fun SettingsTabScreen(
                             "Export failed: ${event.error.localizedMessage}",
                             Toast.LENGTH_LONG)
                         .show()
+                }
+                is SettingsTabViewModel.SettingsEvent.ImportSuccess -> {
+                    Toast.makeText(
+                        context,
+                        "Import OK: ${event.result.inserted} eingefügt, ${event.result.ignoredAsDuplicate} ignoriert (gesamt: ${event.result.totalInFile})",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                is SettingsTabViewModel.SettingsEvent.ImportError -> {
+                    Toast.makeText(
+                        context,
+                        "Import failed: ${event.error.localizedMessage}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -68,7 +93,8 @@ fun SettingsTabScreen(
             title = "Import beers",
             subtitle = "Import beers from a JSON file",
             icon = Icons.Default.Download,
-            onClick = { viewModel.import() }
+            onClick = {                 pickJsonLauncher.launch(arrayOf("application/json", "text/plain"))
+            }
         )
 
         SettingsItemBox(

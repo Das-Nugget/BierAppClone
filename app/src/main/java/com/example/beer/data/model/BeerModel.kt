@@ -6,7 +6,11 @@ import java.io.Serializable
 
 @Entity(
     tableName = "beers",
-    indices = [Index("ratingId"), Index("tasteId")],
+    indices = [
+        Index("ratingId"),
+        Index("tasteId"),
+        Index(value =["name", "producer"], unique = true)
+    ],
     foreignKeys = [
         ForeignKey(
             entity = RatingModel::class,
