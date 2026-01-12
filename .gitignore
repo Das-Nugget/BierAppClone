@@ -1,0 +1,125 @@
+# ===========================================
+# OS-SYSTEMDATEIEN
+# ===========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ===========================================
+# IDE: ANDROID STUDIO / INTELLIJ
+# ===========================================
+.idea/*
+*.iml
+*.ipr
+*.iws
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# ===========================================
+# GRADLE / BUILD
+# ===========================================
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Optional: auskommentieren, wenn Wrapper nicht versioniert werden soll
+# gradlew
+# gradlew.bat
+# gradle/wrapper/
+
+# ===========================================
+# KOTLIN / JAVA
+# ===========================================
+*.class
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+*.orig
+*.rej
+
+# ===========================================
+# ANDROID-SPEZIFISCH
+# ===========================================
+captures/
+outputs/
+reports/
+tmp/
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.hprof
+*.ec
+*.coverage
+test-results/
+
+# ===========================================
+# KSP / ROOM / JETPACK COMPOSE
+# ===========================================
+ksp/
+roomSchemas/
+compose-snapshots/
+
+# ===========================================
+# LOKALE KONFIGURATION / SECRETS
+# ===========================================
+local.properties
+*.keystore
+*.jks
+*.pem
+*.key
+*.crt
+.env
+.env.*
+
+# ===========================================
+# TOOLING / EDITOREN
+# ===========================================
+.vscode/
+*.code-workspace
+
+# ===========================================
+# GRADLE CACHE (optional)
+# ===========================================
+.gradle/
+# Wenn du Gradle-Caches teilen willst, diesen Abschnitt auskommentieren
+
+# ===========================================
+# MISC
+# ===========================================
+*.lock
+*.pid
+*.tar
+*.zip
+*.7z
+*.gz
+
+# ===========================================
+# OS-ZWISCHENSPEICHER
+# ===========================================
+# macOS metadata files
+._*
+# Windows Thumbnails
+ehthumbs_vista.db
+
+# ===========================================
+# OPTIONAL: DOCKER (falls verwendet)
+# ===========================================
+.docker/
+docker-compose.override.yml
