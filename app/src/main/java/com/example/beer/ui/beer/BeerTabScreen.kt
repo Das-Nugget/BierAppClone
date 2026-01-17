@@ -1,5 +1,6 @@
 package com.example.beer.ui.beer
 
+import FilterBeerDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import com.example.beer.ui.searchbar.CustomizableSearchBar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.ui.graphics.Color
@@ -38,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beer.data.model.BeerModel
+import com.example.beer.ui.popups.AddBeerDialog
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -46,6 +49,7 @@ import java.util.*
 fun BeerTabScreen(viewModel: BeerTabViewModel) {
     val searchQuery by viewModel.searchQuery.collectAsState()
     val beers by viewModel.filteredBeers.collectAsState()
+    var showAddDialog by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -82,14 +86,26 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
             )
 
             FilledIconButton(
-                onClick = { /* Open filter menu or perform action */ },
+                onClick = { showAddDialog = true },
                 modifier = Modifier.size(48.dp) // standard touch target size
             ) {
                 Icon(
-                    imageVector = Icons.Default.FilterList,
-                    contentDescription = "Filter"
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add"
                 )
             }
+        }
+
+        if (showAddDialog) {
+            AddBeerDialog(
+                onDismiss = { showAddDialog = false },
+                onSave = { beer ->
+                    viewModel.addBeer(
+                        beer
+                    )
+                    showAddDialog = false
+                }
+            )
         }
     }
 }

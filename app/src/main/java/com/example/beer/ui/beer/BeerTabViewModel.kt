@@ -2,6 +2,7 @@ package com.example.beer.ui.beer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.beer.data.enums.BeerType
 import com.example.beer.data.model.BeerModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -44,6 +45,16 @@ class BeerTabViewModel @Inject constructor(
 
     fun onSearchQueryChange(newQuery: String) {
         _searchQuery.value = newQuery
+    }
+
+    fun addBeer(beer: BeerModel) {
+        viewModelScope.launch {
+            if (beer.id == 0) {
+                beerRepository.addBeer(beer)
+            } else {
+                beerRepository.updateBeer(beer)
+            }
+        }
     }
 
     /*private val _allBeers = MutableStateFlow<List<BeerModel>>(emptyList())

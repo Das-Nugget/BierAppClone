@@ -34,4 +34,5 @@ class BeerRepositoryImpl @Inject constructor(
     override suspend fun deleteBeer(beer: BeerModel) {
         beerDao.deleteBeer(beer)
     }
+
 }
