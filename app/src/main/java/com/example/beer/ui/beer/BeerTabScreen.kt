@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beer.data.model.BeerModel
 import com.example.beer.ui.popups.AddBeerDialog
+import com.example.beer.ui.popups.EditBeerDialogue
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -51,7 +52,9 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
     val searchQuery by viewModel.searchQuery.collectAsState()
     val beers by viewModel.filteredBeers.collectAsState()
     var showAddDialog by remember { mutableStateOf(false) }
-    var showModifyDialog by remember { mutableStateOf(false) }
+    var showOptionsDialog by remember { mutableStateOf(false) }
+    var showEditRatingDialog by remember { mutableStateOf(false) }
+    var selectedBeer by remember { mutableStateOf<BeerModel?>(null) }
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -64,7 +67,9 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
             ) {
                 items(beers) { beer ->
                     Box(modifier = Modifier.fillMaxWidth()
-                        .clickable( onClick = {showModifyDialog = true
+                        .clickable( onClick = {
+                            selectedBeer = beer
+                            showOptionsDialog = true
                         }),)
                     {
                         BeerItem(beer = beer)
@@ -94,7 +99,8 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
             )
 
             FilledIconButton(
-                onClick = { showAddDialog = true },
+                onClick = { selectedBeer = null
+                    showAddDialog = true },
                 modifier = Modifier.size(48.dp) // standard touch target size
             ) {
                 Icon(
@@ -106,6 +112,7 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
 
         if (showAddDialog) {
             AddBeerDialog(
+                beer = selectedBeer,
                 onDismiss = { showAddDialog = false },
                 onSave = { beer ->
                     viewModel.addBeer(
@@ -113,6 +120,17 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                     )
                     showAddDialog = false
                 }
+            )
+        }
+        if (showOptionsDialog) {
+            EditBeerDialogue(
+                onDismiss = { showOptionsDialog = false },
+                onEditBeer ={showAddDialog = true
+                    showOptionsDialog = false},
+                onEditRating = {showEditRatingDialog = true
+                    showOptionsDialog = false},
+                onDeleteBeer = {viewModel.deleteBeer(selectedBeer!!)
+                    showOptionsDialog = false}
             )
         }
     }

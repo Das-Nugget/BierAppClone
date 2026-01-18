@@ -26,7 +26,7 @@ import com.example.beer.data.enums.Sweetness
 import com.example.beer.data.model.BeerModel
 
 @Composable
-fun BeerOptionsDialog(
+fun EditBeerDialogue(
     onEditBeer: () -> Unit,
     onEditRating: () -> Unit,
     onDeleteBeer: () -> Unit,

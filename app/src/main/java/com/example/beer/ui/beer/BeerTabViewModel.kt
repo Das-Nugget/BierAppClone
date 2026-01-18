@@ -56,6 +56,11 @@ class BeerTabViewModel @Inject constructor(
             }
         }
     }
+    fun deleteBeer(beer: BeerModel){
+        viewModelScope.launch {
+            beerRepository.deleteBeer(beer)
+        }
+    }
 
     /*private val _allBeers = MutableStateFlow<List<BeerModel>>(emptyList())
     val allBeers = _allBeers.asStateFlow()
