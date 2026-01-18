@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beer.data.model.BeerModel
 import com.example.beer.ui.popups.AddBeerDialog
+import com.example.beer.ui.popups.AddRatingDialog
 import com.example.beer.ui.popups.EditBeerDialogue
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
@@ -119,6 +120,17 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                         beer
                     )
                     showAddDialog = false
+                }
+            )
+        }
+        if (showEditRatingDialog) {
+            AddRatingDialog(
+                onDismiss = { showEditRatingDialog = false },
+                onSave = { rating, taste ->
+                    viewModel.addRating(
+                        selectedBeer!!, rating, taste
+                    )
+                    showEditRatingDialog = false
                 }
             )
         }

@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.beer.data.enums.BeerType
 import com.example.beer.data.model.BeerModel
+import com.example.beer.data.model.RatingModel
+import com.example.beer.data.model.TasteModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.example.beer.interfaces.BeerRepository
@@ -49,16 +51,17 @@ class BeerTabViewModel @Inject constructor(
 
     fun addBeer(beer: BeerModel) {
         viewModelScope.launch {
-            if (beer.id == 0) {
-                beerRepository.addBeer(beer)
-            } else {
-                beerRepository.updateBeer(beer)
-            }
+            beerRepository.upsertBeer(beer)
         }
     }
     fun deleteBeer(beer: BeerModel){
         viewModelScope.launch {
             beerRepository.deleteBeer(beer)
+        }
+    }
+    fun addRating(beer: BeerModel, rating: RatingModel, taste: TasteModel) {
+        viewModelScope.launch {
+            beerRepository.addRating(beer, rating, taste)
         }
     }
 

@@ -1,9 +1,6 @@
 package com.example.beer.ui.popups
 
-import NumericUnderlinedInputField
-import android.content.Context
-import android.graphics.Bitmap
-import android.net.Uri
+
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,32 +9,18 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -49,21 +32,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.PopupProperties
 import coil.compose.AsyncImage
 import com.example.beer.data.enums.BeerType
 import com.example.beer.data.model.BeerModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
-import java.io.File
-import java.io.FileOutputStream
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -218,144 +195,11 @@ fun AddBeerDialog(
     )
 }
 
-@Composable
-fun ImageActionButton(icon: ImageVector, label: String, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        shape = RoundedCornerShape(12.dp),
-        modifier = Modifier.size(height = 100.dp, width = 110.dp),
-        contentPadding = PaddingValues(4.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3))
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(36.dp))
-            Text(
-                text = label,
-                style = MaterialTheme.typography.labelSmall,
-                textAlign = TextAlign.Center
-            )
-        }
-    }
-}
 
-@Composable
-fun AttributeDoubleInputField(
-    label: String,
-    value: Double,
-    onChange: (Double) -> Unit,
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(label, modifier = Modifier.weight(1f))
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            // Numeric Input for Value
-            NumericUnderlinedInputField(
-                value = value,
-                onValueChange = onChange
-            )
-        }
-    }
-}
 
-@Composable
-fun AttributeStringInputField(
-    label: String,
-    value: String,
-    onChange: (String) -> Unit,
-) {
-    var textState by remember(value) { mutableStateOf(value)}
-    Row(
-        modifier = Modifier.fillMaxWidth()
-            .padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(label, modifier = Modifier.weight(0.3f))
-        Column(modifier = Modifier.weight(0.7f),
-            horizontalAlignment = Alignment.CenterHorizontally) {
-                // Numeric Input for Value
-                BasicTextField(
-                    value = textState,
-                    onValueChange = {newValue ->
-                        textState = newValue
-                        onChange(newValue)
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    textStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Center),
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
-                )
 
-            HorizontalDivider(
-                modifier = Modifier.fillMaxWidth(),
-                thickness = 1.dp,
-                color = Color.Gray
-            )
-        }
-    }
-}
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun BeerTypeSelector(
-    selectedType: BeerType?,
-    onTypeSelected: (BeerType) -> Unit
-) {
-    var searchQuery by remember(selectedType) { mutableStateOf(selectedType?.styleName ?: "") }
-    var expanded by remember { mutableStateOf(false) }
 
-    val filteredOptions = remember(searchQuery) {
-        BeerType.entries.filter {
-            it.styleName.contains(searchQuery, ignoreCase = true)
-        }.sortedBy { it.styleName }
-    }
 
-    // We use a Box to anchor the menu correctly
-    Box(modifier = Modifier.fillMaxWidth()) {
-        OutlinedTextField(
-            value = searchQuery,
-            onValueChange = {
-                searchQuery = it
-                expanded = it.isNotEmpty()
-            },
-            label = { Text("Beer Style") },
-            modifier = Modifier.fillMaxWidth(),
-            trailingIcon = {
-                IconButton(onClick = { expanded = !expanded }) {
-                    Icon(Icons.Default.ArrowDropDown, contentDescription = null)
-                }
-            },
-            singleLine = true
-        )
-
-        // Using standard DropdownMenu for 'properties' support
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-            // This is the magic: focusable = false allows the keyboard to stay active
-            // and the cursor to stay in the TextField while you type
-            properties = PopupProperties(
-                focusable = false,
-                dismissOnBackPress = true,
-                dismissOnClickOutside = true
-            ),
-            modifier = Modifier
-                .fillMaxWidth(0.6f) // Match the width of the text field roughly
-        ) {
-            filteredOptions.take(10).forEach { option -> // Limit results for performance
-                DropdownMenuItem(
-                    text = { Text(option.styleName) },
-                    onClick = {
-                        searchQuery = option.styleName
-                        onTypeSelected(option)
-                        expanded = false
-                    }
-                )
-            }
-        }
-    }
-}
 
