@@ -31,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import com.example.beer.ui.searchbar.CustomizableSearchBar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
@@ -50,6 +51,7 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
     val searchQuery by viewModel.searchQuery.collectAsState()
     val beers by viewModel.filteredBeers.collectAsState()
     var showAddDialog by remember { mutableStateOf(false) }
+    var showModifyDialog by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -61,7 +63,13 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(beers) { beer ->
-                    BeerItem(beer = beer)
+                    Box(modifier = Modifier.fillMaxWidth()
+                        .clickable( onClick = {showModifyDialog = true
+                        }),)
+                    {
+                        BeerItem(beer = beer)
+                    }
+
                 }
             }
         }
@@ -114,6 +122,8 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
 fun BeerItem(beer: BeerModel) {
     val dateFormatter = remember { SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()) }
     val formattedDate = dateFormatter.format(Date(beer.createdAt))
+
+
     Card (
         modifier = Modifier.fillMaxWidth(),
         shape = androidx.compose.foundation.shape.RoundedCornerShape(0)
