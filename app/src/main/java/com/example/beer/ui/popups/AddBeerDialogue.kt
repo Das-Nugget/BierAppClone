@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -116,27 +117,42 @@ fun AddBeerDialog(
                     }
 
                     // Upload Button
+                    Box(
+                        modifier = Modifier
+                            .weight(0.33f)
+                            .background(Color.LightGray),
+                        contentAlignment = Alignment.Center
+                    ) {
                     ImageActionButton(
                         icon = Icons.Default.Folder,
                         label = "Upload an image",
                         onClick = { pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }
                     )
+                    }
 
                     // Camera Button
-                    ImageActionButton(
-                        icon = Icons.Default.PhotoCamera,
-                        label = "Take a photo",
-                        onClick = {
-                            when {
-                                cameraPermissionState.status.isGranted -> {
-                                    cameraLauncher.launch(null)
-                                }
-                                else -> {
-                                    cameraPermissionState.launchPermissionRequest()
+                    Box(
+                        modifier = Modifier
+                            .weight(0.33f)
+                            .background(Color.LightGray),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        ImageActionButton(
+                            icon = Icons.Default.PhotoCamera,
+                            label = "Take a photo",
+                            onClick = {
+                                when {
+                                    cameraPermissionState.status.isGranted -> {
+                                        cameraLauncher.launch(null)
+                                    }
+
+                                    else -> {
+                                        cameraPermissionState.launchPermissionRequest()
+                                    }
                                 }
                             }
-                        }
-                    )
+                        )
+                    }
                 }
 
                 Text("Attributes", style = MaterialTheme.typography.titleLarge)

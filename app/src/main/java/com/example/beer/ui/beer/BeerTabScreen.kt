@@ -37,9 +37,11 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.beer.data.model.BeerModel
 import com.example.beer.ui.popups.AddBeerDialog
 import com.example.beer.ui.popups.AddRatingDialog
@@ -57,29 +59,10 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
     var showEditRatingDialog by remember { mutableStateOf(false) }
     var selectedBeer by remember { mutableStateOf<BeerModel?>(null) }
 
-    Box(modifier = Modifier.fillMaxSize()) {
 
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(beers) { beer ->
-                    Box(modifier = Modifier.fillMaxWidth()
-                        .clickable( onClick = {
-                            selectedBeer = beer
-                            showOptionsDialog = true
-                        }),)
-                    {
-                        BeerItem(beer = beer)
-                    }
-
-                }
-            }
-        }
-
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -100,8 +83,10 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
             )
 
             FilledIconButton(
-                onClick = { selectedBeer = null
-                    showAddDialog = true },
+                onClick = {
+                    selectedBeer = null
+                    showAddDialog = true
+                },
                 modifier = Modifier.size(48.dp) // standard touch target size
             ) {
                 Icon(
@@ -110,6 +95,27 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                 )
             }
         }
+
+        Box(modifier = Modifier.weight(1f)) {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(beers) { beer ->
+                    Box(
+                        modifier = Modifier.fillMaxWidth()
+                            .clickable(onClick = {
+                                selectedBeer = beer
+                                showOptionsDialog = true
+                            }),
+                    )
+                    {
+                        BeerItem(beer = beer)
+                    }
+
+                }
+            }
+        }
+    }
 
         if (showAddDialog) {
             AddBeerDialog(
@@ -145,7 +151,6 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                     showOptionsDialog = false}
             )
         }
-    }
 }
 
 @Composable
@@ -170,11 +175,20 @@ fun BeerItem(beer: BeerModel) {
                     .background(Color(0xFFFFB300)),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "IMG",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold
-                )
+                if (beer.imageURI?.isEmpty() != false) {
+                    Text(
+                        text = "IMG",
+                        color = Color.White,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                } else {
+                    AsyncImage(
+                        model = beer.imageURI,
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                }
             }
             Spacer(modifier = Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
@@ -189,7 +203,7 @@ fun BeerItem(beer: BeerModel) {
                     color = Color.Gray
                 )
                 Text(
-                    text = "year",
+                    text = beer.type.styleName,
                     fontSize = 14.sp,
                     color = Color.Gray
                 )

@@ -9,6 +9,7 @@ import com.example.beer.data.model.TasteModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.example.beer.interfaces.BeerRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -50,17 +51,17 @@ class BeerTabViewModel @Inject constructor(
     }
 
     fun addBeer(beer: BeerModel) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             beerRepository.upsertBeer(beer)
         }
     }
     fun deleteBeer(beer: BeerModel){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             beerRepository.deleteBeer(beer)
         }
     }
     fun addRating(beer: BeerModel, rating: RatingModel, taste: TasteModel) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             beerRepository.addRating(beer, rating, taste)
         }
     }

@@ -6,16 +6,21 @@ import com.example.beer.data.enums.Aftertaste
 import com.example.beer.data.enums.Bitterness
 import com.example.beer.data.enums.Mouthfeel
 import com.example.beer.data.enums.Sweetness
+import com.example.beer.data.model.BeerModel
+import com.example.beer.data.model.RatedBeer
 import com.example.beer.data.model.RatingModel
+import com.example.beer.data.model.TasteModel
 import com.example.beer.interfaces.BeerRepository
 import com.example.beer.interfaces.RatingRepository
 import com.example.beer.interfaces.TasteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -40,19 +45,11 @@ class RatingTabViewModel @Inject constructor(
     private val tasteRepository: TasteRepository,
     private val beerRepository: BeerRepository
 ) : ViewModel() {
-    // Existing allBeers flow
-    val allBeers = beerRepository.getAllBeers()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    // Fetch all ratings to join with beers during filtering
+    // 1. Raw Data Sources (Flows from Room)
+    private val allBeers = beerRepository.getAllBeers()
     private val allRatings = ratingRepository.getAllRatings()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
-
-    // Fetch all ratings to join with beers during filtering
     private val allTastes = tasteRepository.getAllTastes()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
-
-
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
@@ -71,47 +68,76 @@ class RatingTabViewModel @Inject constructor(
         )
     }
 
-    val filteredBeers = combine(allBeers, allRatings, allTastes, _searchQuery, _filters) { beers, ratings, tastes , query, f ->
+    // 2. The Combined and Filtered UI State
+    val filteredBeers = combine(
+        allBeers,
+        allRatings,
+        allTastes,
+        _searchQuery,
+        _filters
+    ) { beers, ratings, tastes, query, f ->
         val ratingsMap = ratings.associateBy { it.id }
+        val tasteMap = tastes.associateBy { it.id }
 
         beers.filter { beer ->
-            // 1. Text Search
-            val matchesQuery = beer.name.contains(query, ignoreCase = true)
+            // --- Text Search ---
+            val matchesQuery = beer.name.contains(query, ignoreCase = true) ||
+                    beer.producer.contains(query, ignoreCase = true)
 
-            // 2. Rating Check
+            // --- Fetch Related Data ---
             val rating = ratingsMap[beer.ratingId]
-            val hasRating = beer.ratingId != null && rating != null
-
-            if (!matchesQuery || !hasRating) return@filter false
+            val taste = tasteMap[beer.tasteId]
 
 
-            // 3. Hardcoded Attribute Filtering
+            if (!matchesQuery || rating == null || taste == null) return@filter false
+
+            // --- Numeric Filtering ---
             val matchesNumeric =
-                rating.overallRating?.let { it in f.minRating..f.maxRating } ?: true &&
+                        rating.overallRating?.let { it in f.minRating..f.maxRating } ?: true &&
                         rating.taste?.let { it.toDouble() in f.minTaste..f.maxTaste } ?: true &&
                         rating.look?.let { it.toDouble() in f.minLook..f.maxLook } ?: true &&
                         rating.drinkability?.let { it.toDouble() in f.minDrinkability..f.maxDrinkability } ?: true
 
-
-            // 4. Taste Check
-            val tasteMap = tastes.associateBy { it.id }
-            val taste = tasteMap[beer.tasteId]
-            val hasTaste = beer.tasteId != null && taste != null
-
-            val matchesEnums = hasTaste && (
+            // --- Enum (Taste) Filtering ---
+            val matchesEnums =
                 (f.aftertaste == null || taste.aftertaste == f.aftertaste) &&
                         (f.bitterness == null || taste.bitterness == f.bitterness) &&
                         (f.mouthfeel == null || taste.mouthfeel == f.mouthfeel) &&
                         (f.sweetness == null || taste.sweetness == f.sweetness)
-                    )
 
             matchesNumeric && matchesEnums
+        }.map { beer ->
+            // Wrap the filtered results into our combined object
+            RatedBeer(
+                beer = beer,
+                rating = ratingsMap[beer.ratingId]!!, // Guaranteed not null by filter
+                taste = tasteMap[beer.tasteId]
+            )
         }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = emptyList()
     )
+
+    // 3. Actions
+    fun addRating(beer: BeerModel, rating: RatingModel, taste: TasteModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            beerRepository.addRating(beer, rating, taste)
+        }
+    }
+
+    fun addBeer(beer: BeerModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            beerRepository.upsertBeer(beer)
+        }
+    }
+
+    fun deleteBeer(beer: BeerModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            beerRepository.deleteBeer(beer)
+        }
+    }
 
     fun onSearchQueryChange(newQuery: String) {
         _searchQuery.value = newQuery
