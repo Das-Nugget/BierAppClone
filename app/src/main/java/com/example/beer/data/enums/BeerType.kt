@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable as KxSerializable
 @KxSerializable
 enum class BeerType(val styleName: String, val category: BeerCategory) {
     // --- Ale Styles (Top-Fermented) ---
+    NULLTYPE("", BeerCategory.UNKNOWN),
     ALTBIER("Altbier", BeerCategory.ALE),
     AMBER_ALE("Amber Ale", BeerCategory.ALE),
     AMERICAN_PALE_ALE("American Pale Ale (APA)", BeerCategory.ALE),

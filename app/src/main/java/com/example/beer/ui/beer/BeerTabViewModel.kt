@@ -2,10 +2,14 @@ package com.example.beer.ui.beer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.beer.data.enums.BeerType
 import com.example.beer.data.model.BeerModel
+import com.example.beer.data.model.RatingModel
+import com.example.beer.data.model.TasteModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.example.beer.interfaces.BeerRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,24 +51,29 @@ class BeerTabViewModel @Inject constructor(
     }
 
     fun addBeer(beer: BeerModel) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             beerRepository.addBeer(beer)
         }
     }
 
     fun updateBeer(beer: BeerModel) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             beerRepository.updateBeer(beer)
         }
 
     }
 
     fun deleteBeer(beer: BeerModel) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             beerRepository.deleteBeer(beer)
         }
     }
 
+    fun addRating(beer: BeerModel, rating: RatingModel, taste: TasteModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            beerRepository.addRating(beer, rating, taste)
+        }
+    }
     /*private val _allBeers = MutableStateFlow<List<BeerModel>>(emptyList())
     val allBeers = _allBeers.asStateFlow()
 

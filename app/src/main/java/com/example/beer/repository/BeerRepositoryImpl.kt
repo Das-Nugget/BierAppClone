@@ -2,6 +2,8 @@ package com.example.beer.repository
 
 import com.example.beer.data.dao.BeerDao
 import com.example.beer.data.model.BeerModel
+import com.example.beer.data.model.RatingModel
+import com.example.beer.data.model.TasteModel
 import com.example.beer.interfaces.BeerRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -33,5 +35,13 @@ class BeerRepositoryImpl @Inject constructor(
 
     override suspend fun deleteBeer(beer: BeerModel) {
         beerDao.deleteBeer(beer)
+    }
+
+    override suspend fun upsertBeer(beer: BeerModel) {
+        beerDao.upsertBeer(beer)
+    }
+
+    override suspend fun addRating(beer: BeerModel, rating: RatingModel, taste: TasteModel) {
+        beerDao.addRating(beer, rating, taste)
     }
 }
