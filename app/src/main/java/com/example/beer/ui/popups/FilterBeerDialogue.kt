@@ -19,31 +19,32 @@ import com.example.beer.data.enums.Mouthfeel
 import com.example.beer.data.enums.Sweetness
 import com.example.beer.ui.popups.EnumTasteDropDown
 import com.example.beer.ui.popups.FilterRangeRow
+import com.example.beer.ui.rating.FilterState
+
 @Composable
 fun FilterBeerDialog(
+    filters: FilterState,
     onDismiss: () -> Unit,
-    onSearch: (minRating: Double, maxRating: Double, minTaste: Double, maxTaste: Double, minLook: Double, maxLook: Double,
-               minDrinkability: Double, maxDrinkability: Double, selectedAftertaste: Aftertaste?, selectedBitterness: Bitterness?,
-               selectedMouthfeel: Mouthfeel?, selectedSweetness: Sweetness?) -> Unit,
+    onSearch: (Double, Double, Double, Double, Double, Double, Double, Double, Aftertaste?, Bitterness?, Mouthfeel?, Sweetness?) -> Unit,
 ) {
     // Internal state for the dialogue inputs
-    var minRating by remember { mutableDoubleStateOf(0.0) }
-    var maxRating by remember { mutableDoubleStateOf(5.0) }
+    var minRating by remember { mutableDoubleStateOf(filters.minRating) }
+    var maxRating by remember { mutableDoubleStateOf(filters.maxRating) }
 
-    var minTaste by remember { mutableDoubleStateOf(0.0) }
-    var maxTaste by remember { mutableDoubleStateOf(5.0) }
+    var minTaste by remember { mutableDoubleStateOf(filters.minTaste) }
+    var maxTaste by remember { mutableDoubleStateOf(filters.maxTaste) }
 
-    var minLook by remember { mutableDoubleStateOf(0.0) }
-    var maxLook by remember { mutableDoubleStateOf(5.0) }
+    var minLook by remember { mutableDoubleStateOf(filters.minLook) }
+    var maxLook by remember { mutableDoubleStateOf(filters.maxLook) }
 
-    var minDrinkability by remember { mutableDoubleStateOf(0.0) }
-    var maxDrinkability by remember { mutableDoubleStateOf(5.0) }
+    var minDrinkability by remember { mutableDoubleStateOf(filters.minDrinkability) }
+    var maxDrinkability by remember { mutableDoubleStateOf(filters.maxDrinkability) }
 
 
-    var selectedAftertaste by remember { mutableStateOf<Aftertaste?>(null) }
-    var selectedBitterness by remember { mutableStateOf<Bitterness?>(null) }
-    var selectedMouthfeel by remember { mutableStateOf<Mouthfeel?>(null) }
-    var selectedSweetness by remember { mutableStateOf<Sweetness?>(null) }
+    var selectedAftertaste by remember { mutableStateOf<Aftertaste?>(filters.aftertaste) }
+    var selectedBitterness by remember { mutableStateOf<Bitterness?>(filters.bitterness) }
+    var selectedMouthfeel by remember { mutableStateOf<Mouthfeel?>(filters.mouthfeel) }
+    var selectedSweetness by remember { mutableStateOf<Sweetness?>(filters.sweetness) }
 
     AlertDialog(
         onDismissRequest = onDismiss,

@@ -8,21 +8,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -42,16 +38,9 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
 import coil.compose.AsyncImage
-import com.example.beer.data.enums.Aftertaste
-import com.example.beer.data.enums.Bitterness
-import com.example.beer.data.enums.Mouthfeel
-import com.example.beer.data.enums.Sweetness
 import com.example.beer.data.model.BeerModel
 import com.example.beer.data.model.RatingModel
-import com.example.beer.data.model.TasteModel
-import com.example.beer.ui.beer.BeerItem
 import com.example.beer.ui.popups.AddBeerDialog
 import com.example.beer.ui.popups.AddRatingDialog
 import com.example.beer.ui.popups.EditBeerDialogue
@@ -64,6 +53,7 @@ import java.util.Locale
 fun RatingTabScreen(viewModel: RatingTabViewModel) {
     val searchQuery by viewModel.searchQuery.collectAsState()
     val beers by viewModel.filteredBeers.collectAsState()
+    val currentFilters by viewModel.filters.collectAsState()
     val softwareKeyboardController = LocalSoftwareKeyboardController.current
     var showFilterDialog by remember { mutableStateOf(false) }
     var showAddDialog by remember { mutableStateOf(false) }
@@ -129,6 +119,7 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
 
     if (showFilterDialog) {
         FilterBeerDialog(
+            currentFilters,
             onDismiss = { showFilterDialog = false },
             onSearch = { minR, maxR, minT, maxT, minL, maxL, minD, maxD, aft, bit, mou, swe ->
                 viewModel.applyFilters(
