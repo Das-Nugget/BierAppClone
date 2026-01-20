@@ -46,6 +46,25 @@ class BeerTabViewModel @Inject constructor(
         _searchQuery.value = newQuery
     }
 
+    fun addBeer(beer: BeerModel) {
+        viewModelScope.launch {
+            beerRepository.addBeer(beer)
+        }
+    }
+
+    fun updateBeer(beer: BeerModel) {
+        viewModelScope.launch {
+            beerRepository.updateBeer(beer)
+        }
+
+    }
+
+    fun deleteBeer(beer: BeerModel) {
+        viewModelScope.launch {
+            beerRepository.deleteBeer(beer)
+        }
+    }
+
     /*private val _allBeers = MutableStateFlow<List<BeerModel>>(emptyList())
     val allBeers = _allBeers.asStateFlow()
 

@@ -49,11 +49,12 @@ fun CustomizableSearchBar(
 
     Box(
         modifier
+            .fillMaxWidth()
             .semantics { isTraversalGroup = true }
     ) {
         SearchBar(
             modifier = Modifier
-                .align(Alignment.TopCenter)
+                .align(Alignment.Center)
                 .semantics { traversalIndex = 0f },
             inputField = {
                 // Customizable input field implementation

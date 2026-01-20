@@ -45,7 +45,7 @@ class RatingTabViewModel @Inject constructor(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     // Fetch all ratings to join with beers during filtering
-    private val allRatings = ratingRepository.getAllRatings()
+    val allRatings = ratingRepository.getAllRatings()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     // Fetch all ratings to join with beers during filtering
@@ -100,13 +100,13 @@ class RatingTabViewModel @Inject constructor(
 
             val matchesEnums = hasTaste && (
                 (f.aftertaste == null || taste.aftertaste == f.aftertaste) &&
-                        (f.bitterness == null || taste.bitterness == f.bitterness) &&
-                        (f.mouthfeel == null || taste.mouthfeel == f.mouthfeel) &&
-                        (f.sweetness == null || taste.sweetness == f.sweetness)
-                    )
+                (f.bitterness == null || taste.bitterness == f.bitterness) &&
+                (f.mouthfeel == null || taste.mouthfeel == f.mouthfeel) &&
+                (f.sweetness == null || taste.sweetness == f.sweetness)
+            )
 
             matchesNumeric && matchesEnums
-        }
+        }.sortedByDescending { beer -> ratingsMap[beer.ratingId]?.overallRating ?: 0.0 }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
