@@ -43,67 +43,6 @@ import androidx.compose.ui.window.PopupProperties
 import com.example.beer.data.enums.BeerType
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun BeerTypeSelector(
-    selectedType: BeerType?,
-    onTypeSelected: (BeerType) -> Unit
-) {
-    var searchQuery by remember(selectedType) { mutableStateOf(selectedType?.styleName ?: "") }
-    var expanded by remember { mutableStateOf(false) }
-
-    val filteredOptions = remember(searchQuery) {
-        BeerType.entries.filter {
-            it.styleName.contains(searchQuery, ignoreCase = true)
-        }.sortedBy { it.styleName }
-    }
-
-    // We use a Box to anchor the menu correctly
-    Box(modifier = Modifier.fillMaxWidth()) {
-        OutlinedTextField(
-            value = searchQuery,
-            onValueChange = {
-                searchQuery = it
-                expanded = it.isNotEmpty()
-            },
-            label = { Text("Beer Style") },
-            modifier = Modifier.fillMaxWidth(),
-            trailingIcon = {
-                IconButton(onClick = { expanded = !expanded }) {
-                    Icon(Icons.Default.ArrowDropDown, contentDescription = null)
-                }
-            },
-            singleLine = true
-        )
-
-        // Using standard DropdownMenu for 'properties' support
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-            // This is the magic: focusable = false allows the keyboard to stay active
-            // and the cursor to stay in the TextField while you type
-            properties = PopupProperties(
-                focusable = false,
-                dismissOnBackPress = true,
-                dismissOnClickOutside = true
-            ),
-            modifier = Modifier
-                .fillMaxWidth(0.6f) // Match the width of the text field roughly
-        ) {
-            filteredOptions.take(10).forEach { option -> // Limit results for performance
-                DropdownMenuItem(
-                    text = { Text(option.styleName) },
-                    onClick = {
-                        searchQuery = option.styleName
-                        onTypeSelected(option)
-                        expanded = false
-                    }
-                )
-            }
-        }
-    }
-}
-
 @Composable
 fun AttributeStringInputField(
     label: String,
@@ -164,25 +103,6 @@ fun AttributeDoubleInputField(
     }
 }
 
-@Composable
-fun ImageActionButton(icon: ImageVector, label: String, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        shape = RoundedCornerShape(12.dp),
-        modifier = Modifier.size(height = 100.dp, width = 110.dp),
-        contentPadding = PaddingValues(4.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3))
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(36.dp))
-            Text(
-                text = label,
-                style = MaterialTheme.typography.labelSmall,
-                textAlign = TextAlign.Center
-            )
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

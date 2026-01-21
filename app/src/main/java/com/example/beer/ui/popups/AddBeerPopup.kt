@@ -31,15 +31,20 @@ import coil.compose.rememberAsyncImagePainter
 import android.graphics.Bitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import android.content.Context
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import com.example.beer.ui.theme.beerAmber
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun AddBeerPopup(
     beerToEdit: BeerModel? = null,
@@ -52,15 +57,37 @@ fun AddBeerPopup(
     var alcohol by remember { mutableStateOf(beerToEdit?.alcoholPercentage?.toString() ?: "") }
     var price by remember { mutableStateOf(beerToEdit?.price?.toString() ?: "") }
     var note by remember { mutableStateOf(beerToEdit?.note ?: "") }
-    var selectedType by remember { mutableStateOf(BeerType.LAGER) }
+    var selectedType by remember { mutableStateOf(beerToEdit?.type ?:BeerType.LAGER) }
     var expanded by remember { mutableStateOf(false) }
     var typeSearchQuery by remember { mutableStateOf(selectedType.styleName) }
     var imageUri by remember { mutableStateOf<Uri?>(beerToEdit?.imageURI?.let { Uri.parse(it) }) }
 
-    val galleryLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
-    ) { uri: Uri? ->
-        if (uri != null) imageUri = uri
+    // In BeerFormDialog
+    val context = LocalContext.current
+
+    // Launcher for picking from gallery (Photo Picker)
+    val pickMedia = rememberLauncherForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri != null) {
+            val localUri = copyImageToInternalStorage(context, uri)
+            if (localUri != null) {
+                imageUri = localUri.toUri()
+            }
+        }
+    }
+
+    // 1. Permission State (Using Accompanist is the standard way)
+// Add implementation("com.google.accompanist:accompanist-permissions:0.34.0")
+    val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
+
+// 2. Camera Launcher
+    val cameraLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.TakePicturePreview()
+    ) { bitmap ->
+        if (bitmap != null) {
+            imageUri = saveImageToInternalStorage(context, bitmap)?.toUri()
+        }
     }
 
     val filteredTypes = remember(typeSearchQuery) {
@@ -119,7 +146,7 @@ fun AddBeerPopup(
 
                     // Dummy Button: Upload
                     Button(
-                        onClick = { galleryLauncher.launch("image/*") },
+                        onClick = { pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))},
                         modifier = Modifier.weight(1f).height(60.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3), contentColor = Color.White),
                         shape = MaterialTheme.shapes.small
@@ -132,7 +159,17 @@ fun AddBeerPopup(
 
                     // Dummy Button: Photo
                     Button(
-                        onClick = { },
+                        onClick = {
+                            when {
+                                cameraPermissionState.status.isGranted -> {
+                                    cameraLauncher.launch(null)
+                                }
+
+                                else -> {
+                                    cameraPermissionState.launchPermissionRequest()
+                                }
+                            }
+                        },
                         modifier = Modifier.weight(1f).height(60.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3), contentColor = Color.White),
                         shape = MaterialTheme.shapes.small

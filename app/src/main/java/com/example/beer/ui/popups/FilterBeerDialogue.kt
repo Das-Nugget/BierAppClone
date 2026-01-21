@@ -113,7 +113,23 @@ fun FilterBeerDialog(
         },
         dismissButton = {
             Row {
-                TextButton(onClick = { /* Reset Logic */ }) { Text("RESET") }
+                TextButton(onClick = {
+                    minRating = 0.0
+                    maxRating = 5.0
+                    minTaste = 0.0
+                    maxTaste = 5.0
+
+                    minLook = 0.0
+                    maxLook = 5.0
+
+                    minDrinkability = 0.0
+                    maxDrinkability = 5.0
+
+                    selectedAftertaste = null
+                    selectedBitterness = null
+                    selectedMouthfeel = null
+                    selectedSweetness = null
+                }) { Text("RESET") }
                 TextButton(onClick = onDismiss) { Text("CANCEL") }
             }
         }

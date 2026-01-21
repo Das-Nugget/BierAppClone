@@ -1,6 +1,5 @@
 package com.example.beer.ui.beer
 
-import FilterBeerDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,10 +8,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import com.example.beer.ui.popups.AddBeerPopup
+import com.example.beer.ui.popups.BeerOptionsPopup
+import com.example.beer.ui.popups.ConfirmationPopup
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import com.example.beer.ui.theme.beerAmber
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
@@ -28,25 +31,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.Alignment
 import com.example.beer.ui.searchbar.CustomizableSearchBar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import com.example.beer.data.model.BeerModel
-import com.example.beer.ui.popups.AddBeerDialog
-import com.example.beer.ui.popups.AddRatingDialog
-import com.example.beer.ui.popups.EditBeerDialogue
 import java.text.SimpleDateFormat
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.rememberAsyncImagePainter
+import androidx.compose.material3.AlertDialogDefaults.containerColor
+import com.example.beer.data.model.RatedBeer
+import com.example.beer.ui.popups.AddRatingDialog
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -54,172 +63,218 @@ import java.util.*
 fun BeerTabScreen(viewModel: BeerTabViewModel) {
     val searchQuery by viewModel.searchQuery.collectAsState()
     val beers by viewModel.filteredBeers.collectAsState()
+
     var showAddDialog by remember { mutableStateOf(false) }
     var showOptionsDialog by remember { mutableStateOf(false) }
+    var showEditDialog by remember { mutableStateOf(false) }
+    var selectedBeer by remember { mutableStateOf<RatedBeer?>(null) }
+    var showDeleteConfirmation by remember { mutableStateOf(false) }
+    var showCancelConfirmation by remember { mutableStateOf(false) }
+    var pendingCancelAction by remember { mutableStateOf({}) }
     var showEditRatingDialog by remember { mutableStateOf(false) }
-    var selectedBeer by remember { mutableStateOf<BeerModel?>(null) }
+
 
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White) // Hintergrund für den ganzen Screen
     ) {
+        // --- TOPBAR / SEARCH BEREICH ---
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp) // Space between bar and button
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             CustomizableSearchBar(
                 query = searchQuery,
                 onQueryChange = { viewModel.onSearchQueryChange(it) },
                 onSearch = { /* Handle search */ },
-                searchResults = beers.map { it.name },
+                searchResults = beers.map { it.beer.name },
                 onResultClick = { selectedName ->
                     viewModel.onSearchQueryChange(selectedName)
                 },
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .align(Alignment.CenterVertically),
                 placeholder = { Text("Search for a beer...") }
             )
 
+            // Der gelbe Plus-Button aus deinem Mockup
             FilledIconButton(
-                onClick = {
-                    selectedBeer = null
-                    showAddDialog = true
-                },
-                modifier = Modifier.size(48.dp) // standard touch target size
+                onClick = { showAddDialog = true },
+                modifier = Modifier.size(56.dp),
+                colors = IconButtonDefaults.filledIconButtonColors(
+                    containerColor = beerAmber,
+                    contentColor = Color.White
+                )
             ) {
                 Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Add"
+                    imageVector = Icons.Default.Add, // Import: androidx.compose.material.icons.filled.Add
+                    contentDescription = "Add Beer",
                 )
             }
         }
 
-        Box(modifier = Modifier.weight(1f)) {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(beers) { beer ->
-                    Box(
-                        modifier = Modifier.fillMaxWidth()
-                            .clickable(onClick = {
-                                selectedBeer = beer
-                                showOptionsDialog = true
-                            }),
-                    )
-                    {
-                        BeerItem(beer = beer)
-                    }
-
+        // --- LISTE ---
+        // Die LazyColumn nimmt nun den restlichen Platz ein, ohne die Suchleiste zu überlappen
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(beers) { beer ->
+                Box(modifier = Modifier.clickable {
+                    selectedBeer = beer
+                    showOptionsDialog = true
+                }) {
+                    BeerItem(beer = beer.beer, themeColor = beerAmber)
                 }
             }
         }
     }
+    // Dialog 1: Auswahl (Edit/Delete)
+    if (showOptionsDialog && selectedBeer != null) {
+        BeerOptionsPopup(
+            onDismiss = { showOptionsDialog = false },
+            onEditBeer = {
+                showOptionsDialog = false
+                showEditDialog = true
+            },
+            onEditRating = {showOptionsDialog = false
+                showEditRatingDialog = true},
+            onDeleteBeer = {
+                showOptionsDialog = false
+                showDeleteConfirmation = true
+            }
+        )
+    }
 
-        if (showAddDialog) {
-            AddBeerDialog(
-                beer = selectedBeer,
-                onDismiss = { showAddDialog = false },
-                onSave = { beer ->
-                    viewModel.addBeer(
-                        beer
-                    )
-                    showAddDialog = false
-                }
-            )
-        }
-        if (showEditRatingDialog) {
-            AddRatingDialog(
-                onDismiss = { showEditRatingDialog = false },
-                onSave = { rating, taste ->
-                    viewModel.addRating(
-                        selectedBeer!!, rating, taste
-                    )
-                    showEditRatingDialog = false
-                }
-            )
-        }
-        if (showOptionsDialog) {
-            EditBeerDialogue(
-                onDismiss = { showOptionsDialog = false },
-                onEditBeer ={showAddDialog = true
-                    showOptionsDialog = false},
-                onEditRating = {showEditRatingDialog = true
-                    showOptionsDialog = false},
-                onDeleteBeer = {viewModel.deleteBeer(selectedBeer!!)
-                    showOptionsDialog = false}
-            )
-        }
+    if (showDeleteConfirmation) {
+        ConfirmationPopup(
+            text = "Are you sure you want to delete?",
+            onConfirm = {
+                selectedBeer?.let { viewModel.deleteBeer(it.beer) }
+                showDeleteConfirmation = false
+                selectedBeer = null
+            },
+            onDismiss = { showDeleteConfirmation = false }
+        )
+    }
+
+    // Dialog 2: Bearbeiten (Nutzt das angepasste AddBeerPopup)
+    if (showEditDialog && selectedBeer != null) {
+        AddBeerPopup(
+            beerToEdit = selectedBeer?.beer,
+            onDismiss = {
+                pendingCancelAction = {showEditDialog = false }
+                showCancelConfirmation = true
+            },
+            onSave = { updatedBeer ->
+                viewModel.updateBeer(updatedBeer)
+                showEditDialog = false
+            }
+        )
+    }
+
+    if (showEditRatingDialog) {
+        AddRatingDialog(
+            rating = selectedBeer?.rating,
+            tasteModel = selectedBeer?.taste,
+            onDismiss = { showEditRatingDialog = false },
+            onSave = { rating, taste ->
+                viewModel.addRating(
+                    selectedBeer!!.beer, rating, taste
+                )
+                showEditRatingDialog = false
+            }
+        )
+    }
+
+    // Dialog 3: Neu Erstellen
+    if (showAddDialog) {
+        AddBeerPopup(
+            onDismiss = {
+                pendingCancelAction = {showAddDialog = false }
+                showCancelConfirmation = true
+            },
+            onSave = { newBeer ->
+                viewModel.addBeer(newBeer)
+                showAddDialog = false
+            }
+        )
+    }
+
+    if (showCancelConfirmation) {
+        ConfirmationPopup(
+            text = "Are you sure you want to cancel?",
+            onConfirm = {
+                pendingCancelAction()
+                showCancelConfirmation = false
+            },
+            onDismiss = { showCancelConfirmation = false }
+        )
+    }
 }
 
 @Composable
-fun BeerItem(beer: BeerModel) {
+fun BeerItem(beer: BeerModel, themeColor: Color) {
     val dateFormatter = remember { SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()) }
     val formattedDate = dateFormatter.format(Date(beer.createdAt))
 
-
-    Card (
+    Surface(
         modifier = Modifier.fillMaxWidth(),
-        shape = androidx.compose.foundation.shape.RoundedCornerShape(0)
+        color = Color.White
     ) {
-        Row(
-            modifier = Modifier
-                .padding(12.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
+        Column {
+            Row(
                 modifier = Modifier
-                    .size(80.dp)
-                    .background(Color(0xFFFFB300)),
-                contentAlignment = Alignment.Center
+                    .padding(12.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                if (beer.imageURI?.isEmpty() != false) {
+                // 1. Spalte: Bild-Platzhalter
+                Box(modifier = Modifier.size(80.dp).background(themeColor)) {
+                    if (beer.imageURI != null) {
+                        Image(
+                            painter = rememberAsyncImagePainter(beer.imageURI),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+                    } else {
+                        Text("IMG", color = Color.White, modifier = Modifier.align(Alignment.Center))
+                    }
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                // 2. Spalte: Informationen
+                Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "IMG",
-                        color = Color.White,
-                        style = MaterialTheme.typography.titleMedium
+                        text = beer.name,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
-                } else {
-                    AsyncImage(
-                        model = beer.imageURI,
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
+                    Text(
+                        text = beer.producer,
+                        fontSize = 14.sp,
+                        color = Color.Gray
                     )
                 }
-            }
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = beer.name,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = beer.producer,
-                    fontSize = 14.sp,
-                    color = Color.Gray
-                )
-                Text(
-                    text = beer.type.styleName,
-                    fontSize = 14.sp,
-                    color = Color.Gray
-                )
-            }
-            Box(
-                modifier = Modifier.fillMaxHeight(),
-                contentAlignment = Alignment.BottomEnd
-            ) {
+
+                // 3. Spalte: Datum ganz rechts
                 Text(
                     text = formattedDate,
                     fontSize = 12.sp,
-                    color = Color.Gray
+                    color = Color.Gray,
+                    modifier = Modifier.align(Alignment.Bottom)
                 )
             }
         }
-
-        HorizontalDivider(thickness = 0.5.dp, color = Color.LightGray)
+        HorizontalDivider(
+            thickness = 0.5.dp,
+            color = Color.LightGray,
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
     }
 }
