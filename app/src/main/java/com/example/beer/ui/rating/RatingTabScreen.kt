@@ -1,6 +1,7 @@
 package com.example.beer.ui.rating
 
 import FilterBeerDialog
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -51,6 +52,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+private const val TAG = "RatingTabScreen"
+
 @Composable
 fun RatingTabScreen(viewModel: RatingTabViewModel) {
 
@@ -58,6 +61,7 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
     val beers by viewModel.filteredBeers.collectAsState()
     val currentFilters by viewModel.filters.collectAsState()
     val softwareKeyboardController = LocalSoftwareKeyboardController.current
+
     var showFilterDialog by remember { mutableStateOf(false) }
     var showAddDialog by remember { mutableStateOf(false) }
     var showOptionsDialog by remember { mutableStateOf(false) }
@@ -66,6 +70,11 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
     var showEditDialog by remember { mutableStateOf(false) }
     var showDeleteConfirmation by remember { mutableStateOf(false) }
     var showCancelConfirmation by remember { mutableStateOf(false) }
+
+    /* pendingCancelAction stores a lambda of the UI state change that was
+       interrupted by the confirmation dialog, allowing us to resume the
+       original dismissal logic after the user confirms.
+    */
     var pendingCancelAction by remember { mutableStateOf({}) }
 
     Column(
@@ -76,14 +85,21 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp) // Space between bar and button
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             CustomizableSearchBar(
                 query = searchQuery,
-                onQueryChange = { viewModel.onSearchQueryChange(it) },
-                onSearch = { softwareKeyboardController?.hide() },
+                onQueryChange = {
+                    Log.v(TAG, "Search query update: $it")
+                    viewModel.onSearchQueryChange(it)
+                },
+                onSearch = {
+                    Log.d(TAG, "Search triggered for: $searchQuery")
+                    softwareKeyboardController?.hide()
+                },
                 searchResults = beers.map { it.beer.name },
                 onResultClick = { selectedName ->
+                    Log.d(TAG, "Search result selected: $selectedName")
                     viewModel.onSearchQueryChange(selectedName)
                 },
                 modifier = Modifier.weight(1f),
@@ -91,8 +107,11 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
             )
 
             FilledIconButton(
-                onClick = { showFilterDialog = true },
-                modifier = Modifier.size(48.dp) // standard touch target size
+                onClick = {
+                    Log.d(TAG, "Filter dialog opened")
+                    showFilterDialog = true
+                },
+                modifier = Modifier.size(48.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.FilterList,
@@ -108,6 +127,7 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
                     Box(
                         modifier = Modifier.fillMaxWidth()
                             .clickable(onClick = {
+                                Log.d(TAG, "Beer item clicked: ${beer.beer.name}")
                                 selectedBeer = beer
                                 showOptionsDialog = true
                             }),
@@ -127,8 +147,12 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
     if (showFilterDialog) {
         FilterBeerDialog(
             currentFilters,
-            onDismiss = { showFilterDialog = false },
+            onDismiss = {
+                Log.d(TAG, "Filter dialog dismissed")
+                showFilterDialog = false
+            },
             onSearch = { minR, maxR, minT, maxT, minL, maxL, minD, maxD, aft, bit, mou, swe ->
+                Log.i(TAG, "Applying filters...")
                 viewModel.applyFilters(
                     minR, maxR, minT, maxT, minL, maxL, minD, maxD, aft, bit, mou, swe
                 )
@@ -136,17 +160,22 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
             }
         )
     }
-    // Dialog 1: Auswahl (Edit/Delete)
+
     if (showOptionsDialog && selectedBeer != null) {
         BeerOptionsPopup(
             onDismiss = { showOptionsDialog = false },
             onEditBeer = {
+                Log.d(TAG, "Option selected: Edit Beer")
                 showOptionsDialog = false
                 showEditDialog = true
             },
-            onEditRating = { showOptionsDialog = false
-                showEditRatingDialog = true},
+            onEditRating = {
+                Log.d(TAG, "Option selected: Edit Rating")
+                showOptionsDialog = false
+                showEditRatingDialog = true
+            },
             onDeleteBeer = {
+                Log.d(TAG, "Option selected: Delete Beer")
                 showOptionsDialog = false
                 showDeleteConfirmation = true
             }
@@ -157,23 +186,28 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
         ConfirmationPopup(
             text = "Are you sure you want to delete?",
             onConfirm = {
+                Log.w(TAG, "Deleting beer: ${selectedBeer?.beer?.name}")
                 selectedBeer?.let { viewModel.deleteBeer(it.beer) }
                 showDeleteConfirmation = false
                 selectedBeer = null
             },
-            onDismiss = { showDeleteConfirmation = false }
+            onDismiss = {
+                Log.d(TAG, "Delete confirmation cancelled")
+                showDeleteConfirmation = false
+            }
         )
     }
 
-    // Dialog 2: Bearbeiten (Nutzt das angepasste AddBeerPopup)
     if (showEditDialog && selectedBeer != null) {
         AddBeerPopup(
             beerToEdit = selectedBeer?.beer,
             onDismiss = {
-                pendingCancelAction = {showEditDialog = false }
+                Log.d(TAG, "Edit dialog cancellation requested")
+                pendingCancelAction = { showEditDialog = false }
                 showCancelConfirmation = true
             },
             onSave = { updatedBeer ->
+                Log.i(TAG, "Updating beer details: ${updatedBeer.name}")
                 viewModel.addBeer(updatedBeer)
                 showEditDialog = false
             }
@@ -186,6 +220,7 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
             tasteModel = selectedBeer?.taste,
             onDismiss = { showEditRatingDialog = false },
             onSave = { rating, taste ->
+                Log.i(TAG, "Saving rating update for: ${selectedBeer?.beer?.name}")
                 viewModel.addRating(
                     selectedBeer!!.beer, rating, taste
                 )
@@ -194,14 +229,15 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
         )
     }
 
-    // Dialog 3: Neu Erstellen
     if (showAddDialog) {
         AddBeerPopup(
             onDismiss = {
-                pendingCancelAction = {showAddDialog = false }
+                Log.d(TAG, "Add dialog cancellation requested")
+                pendingCancelAction = { showAddDialog = false }
                 showCancelConfirmation = true
             },
             onSave = { newBeer ->
+                Log.i(TAG, "Saving new beer: ${newBeer.name}")
                 viewModel.addBeer(newBeer)
                 showAddDialog = false
             }
@@ -212,10 +248,14 @@ fun RatingTabScreen(viewModel: RatingTabViewModel) {
         ConfirmationPopup(
             text = "Are you sure you want to cancel?",
             onConfirm = {
+                Log.d(TAG, "Cancel confirmed via popup")
                 pendingCancelAction()
                 showCancelConfirmation = false
             },
-            onDismiss = { showCancelConfirmation = false }
+            onDismiss = {
+                Log.d(TAG, "Cancel confirmation dismissed (staying in dialog)")
+                showCancelConfirmation = false
+            }
         )
     }
 }
@@ -278,7 +318,6 @@ fun BeerRatingItem(beer: BeerModel, rating: RatingModel) {
                     )
                 }
 
-                // 3. Right Side Rating (Star + Number)
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
