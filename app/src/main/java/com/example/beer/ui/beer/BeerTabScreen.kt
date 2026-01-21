@@ -1,63 +1,36 @@
 package com.example.beer.ui.beer
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import com.example.beer.ui.popups.AddBeerPopup
-import com.example.beer.ui.popups.BeerOptionsPopup
-import com.example.beer.ui.popups.ConfirmationPopup
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import com.example.beer.ui.theme.beerAmber
-import androidx.compose.material.icons.filled.FilterList
-import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.ui.Alignment
-import com.example.beer.ui.searchbar.CustomizableSearchBar
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.beer.data.model.BeerModel
-import java.text.SimpleDateFormat
-import androidx.compose.foundation.Image
-import androidx.compose.ui.layout.ContentScale
 import coil.compose.rememberAsyncImagePainter
-import androidx.compose.material3.AlertDialogDefaults.containerColor
+import com.example.beer.data.model.BeerModel
 import com.example.beer.data.model.RatedBeer
+import com.example.beer.ui.popups.AddBeerPopup
 import com.example.beer.ui.popups.AddRatingDialog
-import java.time.format.DateTimeFormatter
+import com.example.beer.ui.popups.BeerOptionsPopup
+import com.example.beer.ui.popups.ConfirmationPopup
+import com.example.beer.ui.searchbar.CustomizableSearchBar
+import com.example.beer.ui.theme.beerAmber
+import java.text.SimpleDateFormat
 import java.util.*
+
+private const val TAG = "BeerTabScreen"
 
 @Composable
 fun BeerTabScreen(viewModel: BeerTabViewModel) {
@@ -70,17 +43,20 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
     var selectedBeer by remember { mutableStateOf<RatedBeer?>(null) }
     var showDeleteConfirmation by remember { mutableStateOf(false) }
     var showCancelConfirmation by remember { mutableStateOf(false) }
-    var pendingCancelAction by remember { mutableStateOf({}) }
     var showEditRatingDialog by remember { mutableStateOf(false) }
 
-
+    /**
+     * pendingCancelAction stores a lambda of the dialog-closing logic.
+     * This allows us to trigger the 'Cancel Confirmation' popup from multiple sources
+     * and know which specific dialog to close upon confirmation.
+     */
+    var pendingCancelAction by remember { mutableStateOf({}) }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White) // Hintergrund für den ganzen Screen
+            .background(Color.White)
     ) {
-        // --- TOPBAR / SEARCH BEREICH ---
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -90,10 +66,14 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
         ) {
             CustomizableSearchBar(
                 query = searchQuery,
-                onQueryChange = { viewModel.onSearchQueryChange(it) },
-                onSearch = { /* Handle search */ },
+                onQueryChange = {
+                    Log.d(TAG, "Search query changed: $it")
+                    viewModel.onSearchQueryChange(it)
+                },
+                onSearch = { Log.i(TAG, "Search executed for: $searchQuery") },
                 searchResults = beers.map { it.beer.name },
                 onResultClick = { selectedName ->
+                    Log.d(TAG, "Search result clicked: $selectedName")
                     viewModel.onSearchQueryChange(selectedName)
                 },
                 modifier = Modifier
@@ -102,9 +82,11 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                 placeholder = { Text("Search for a beer...") }
             )
 
-            // Der gelbe Plus-Button aus deinem Mockup
             FilledIconButton(
-                onClick = { showAddDialog = true },
+                onClick = {
+                    Log.d(TAG, "Add button clicked")
+                    showAddDialog = true
+                },
                 modifier = Modifier.size(56.dp),
                 colors = IconButtonDefaults.filledIconButtonColors(
                     containerColor = beerAmber,
@@ -112,17 +94,16 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
                 )
             ) {
                 Icon(
-                    imageVector = Icons.Default.Add, // Import: androidx.compose.material.icons.filled.Add
+                    imageVector = Icons.Default.Add,
                     contentDescription = "Add Beer",
                 )
             }
         }
 
-        // --- LISTE ---
-        // Die LazyColumn nimmt nun den restlichen Platz ein, ohne die Suchleiste zu überlappen
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(beers) { beer ->
                 Box(modifier = Modifier.clickable {
+                    Log.d(TAG, "Beer selected: ${beer.beer.name}")
                     selectedBeer = beer
                     showOptionsDialog = true
                 }) {
@@ -131,17 +112,22 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
             }
         }
     }
-    // Dialog 1: Auswahl (Edit/Delete)
+
     if (showOptionsDialog && selectedBeer != null) {
         BeerOptionsPopup(
             onDismiss = { showOptionsDialog = false },
             onEditBeer = {
+                Log.d(TAG, "Option: Edit Beer selected")
                 showOptionsDialog = false
                 showEditDialog = true
             },
-            onEditRating = {showOptionsDialog = false
-                showEditRatingDialog = true},
+            onEditRating = {
+                Log.d(TAG, "Option: Edit Rating selected")
+                showOptionsDialog = false
+                showEditRatingDialog = true
+            },
             onDeleteBeer = {
+                Log.d(TAG, "Option: Delete Beer selected")
                 showOptionsDialog = false
                 showDeleteConfirmation = true
             }
@@ -152,6 +138,7 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
         ConfirmationPopup(
             text = "Are you sure you want to delete?",
             onConfirm = {
+                Log.i(TAG, "Deleting beer: ${selectedBeer?.beer?.name}")
                 selectedBeer?.let { viewModel.deleteBeer(it.beer) }
                 showDeleteConfirmation = false
                 selectedBeer = null
@@ -160,15 +147,15 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
         )
     }
 
-    // Dialog 2: Bearbeiten (Nutzt das angepasste AddBeerPopup)
     if (showEditDialog && selectedBeer != null) {
         AddBeerPopup(
             beerToEdit = selectedBeer?.beer,
             onDismiss = {
-                pendingCancelAction = {showEditDialog = false }
+                pendingCancelAction = { showEditDialog = false }
                 showCancelConfirmation = true
             },
             onSave = { updatedBeer ->
+                Log.i(TAG, "Updating beer: ${updatedBeer.name}")
                 viewModel.updateBeer(updatedBeer)
                 showEditDialog = false
             }
@@ -181,22 +168,21 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
             tasteModel = selectedBeer?.taste,
             onDismiss = { showEditRatingDialog = false },
             onSave = { rating, taste ->
-                viewModel.addRating(
-                    selectedBeer!!.beer, rating, taste
-                )
+                Log.i(TAG, "Saving rating for beer: ${selectedBeer?.beer?.name}")
+                viewModel.addRating(selectedBeer!!.beer, rating, taste)
                 showEditRatingDialog = false
             }
         )
     }
 
-    // Dialog 3: Neu Erstellen
     if (showAddDialog) {
         AddBeerPopup(
             onDismiss = {
-                pendingCancelAction = {showAddDialog = false }
+                pendingCancelAction = { showAddDialog = false }
                 showCancelConfirmation = true
             },
             onSave = { newBeer ->
+                Log.i(TAG, "Adding new beer: ${newBeer.name}")
                 viewModel.addBeer(newBeer)
                 showAddDialog = false
             }
@@ -207,6 +193,7 @@ fun BeerTabScreen(viewModel: BeerTabViewModel) {
         ConfirmationPopup(
             text = "Are you sure you want to cancel?",
             onConfirm = {
+                Log.d(TAG, "Cancel confirmed")
                 pendingCancelAction()
                 showCancelConfirmation = false
             },
@@ -231,7 +218,6 @@ fun BeerItem(beer: BeerModel, themeColor: Color) {
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // 1. Spalte: Bild-Platzhalter
                 Box(modifier = Modifier.size(80.dp).background(themeColor)) {
                     if (beer.imageURI != null) {
                         Image(
@@ -247,7 +233,6 @@ fun BeerItem(beer: BeerModel, themeColor: Color) {
 
                 Spacer(modifier = Modifier.width(16.dp))
 
-                // 2. Spalte: Informationen
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = beer.name,
@@ -262,7 +247,6 @@ fun BeerItem(beer: BeerModel, themeColor: Color) {
                     )
                 }
 
-                // 3. Spalte: Datum ganz rechts
                 Text(
                     text = formattedDate,
                     fontSize = 12.sp,
